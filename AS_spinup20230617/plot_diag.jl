@@ -1,6 +1,6 @@
 # plot CM1 output
 
-activate("..")
+using Pkg; Pkg.activate("..")
 
 using Revise
 using NCDatasets
@@ -102,7 +102,7 @@ contourf(t/24, zs, ds["u"][1,1,:,:], levels=-20:1:20, vmin=-15, vmax=15, cmap=Co
 colorbar()
 contour(t/24, zs, th, colors=["k"], linewidth=0.05, levels=280:2:500)
 contour(t/24, zw, Ri, levels=[1, 4], colors="c" )
-contour(t/24, zw, Ri, levels=[0, 0.25], colors="m" )
+contour(t/24, zw, Ri, levels=[0, 0.25], colors="m" ) # magenta is unstable
 # contour(t/24, zw, Ri_moist, levels=[0.25], colors="g", linewidth=0.1 )
 # contour(t, zs, ds["rtke"][1,1,:,:], colors="y")
 ylim([0, 8])
