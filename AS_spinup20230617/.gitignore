@@ -1,8 +1,0 @@
-# link to data directory
-data
-
-# plots
-*.png
-*.pdf
-*.eps
-*.svg
