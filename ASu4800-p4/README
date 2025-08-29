@@ -1,0 +1,20 @@
+ASu4800-p4
+
+EKAMSAT Arabian Sea case using June 17 2023 sounding.
+1024 x 512
+10 degree N
+Simplified sounding, linearly interpolating from 1200-7200 m.
+
+ASu4800-p4 adds U=0.4 m/s wind point at 4800 m to the initial sounding, 
+providing an intermediate reduced-shear case.
+
+This is a wind shear experiment corresponding to control case ASspinup20230617.
+Adapted from CM1 standard case cpm_RadConvEquil
+Simon de Szoeke
+
+  Cloud Permitting Model (CPM) simulation of Radiative Convective Equilibrium
+  (RCE) following Bretherton et al. (2005, JAS, pg 4273). 
+
+
+  NOTE: no diurnal cycle.  (Solar constant is fixed at 650.83 W/m2)
+
