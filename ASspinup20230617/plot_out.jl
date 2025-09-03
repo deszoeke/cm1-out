@@ -40,6 +40,8 @@ time = ds["time"][:]
 gt(v) = ds[v][:,:,1,5]
 th = gt("th")
 qv = gt("qv")
+u10 = ds["u10"][:,:,5]
+v10 = ds["v10"][:,:,5]
 
 clf()
 subplot(2,1,1)
@@ -55,3 +57,17 @@ tight_layout()
 
 fmts = ["svg", "pdf", "eps", "png"]
 [ savefig("coldpools_d4.$(f)") for f in fmts ]
+
+clf()
+subplot(2,1,1)
+pcolormesh((0:length(lon)).*0.5, (0:length(lat)).*0.5, pd(u10), vmin=0, vmax=14, cmap=ColorMap("RdYlBu_r"))
+colorbar(label=L"u_{10}"*" (m/s)")
+gca().set_aspect("equal")
+
+subplot(2,1,2)
+pcolormesh((0:length(lon)).*0.5, (0:length(lat)).*0.5, pd(v10), cmap=ColorMap("RdYlBu_r"))
+colorbar(label=L"v_{10}"*" (m/s)")
+gca().set_aspect("equal")
+tight_layout()
+
+[savefig("u10v10.$(f)") for f in fmts]
