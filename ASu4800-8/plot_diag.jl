@@ -96,6 +96,7 @@ ylabel("height (km)")
 fmts = ["svg", "pdf", "eps", "png"]
 [savefig("ASqvth.$(f)") for f in fmts]
 
+#=
 # timeheight of u, Ri
 clf()
 contourf(t/24, zs, ds["u"][1,1,:,:], levels=-20:1:20, vmin=-15, vmax=15, cmap=ColorMap("RdYlBu_r"))
@@ -115,3 +116,4 @@ ylabel("height (km)")
 # moist process only slightly increases instability, esp at 4 km center of a th ML.
 
 [savefig("ASuthRi.$(f)") for f in fmts]
+=#

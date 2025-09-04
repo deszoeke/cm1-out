@@ -1,6 +1,6 @@
 # plot CM1 output
 
-activate("..")
+using Pkg; Pkg.activate("..")
 
 using Revise
 using NCDatasets
