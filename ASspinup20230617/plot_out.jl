@@ -1,6 +1,6 @@
 # plot CM1 output
 
-activate("..")
+using Pkg; Pkg.activate("..")
 
 using Revise
 using NCDatasets
@@ -55,7 +55,7 @@ colorbar(label=L"q_v"*" (g/kg)")
 gca().set_aspect("equal")
 tight_layout()
 
-fmts = ["svg", "pdf", "eps", "png"]
+fmts = ["png", "eps", "svg", "pdf"] # they don't crash, but might make corrupt figures
 [ savefig("coldpools_d4.$(f)") for f in fmts ]
 
 clf()
