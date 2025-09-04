@@ -3,6 +3,7 @@
 using Pkg; Pkg.activate(".")
 
 using Revise
+using Base.Threads
 using NCDatasets
 using Statistics
 using Dates
@@ -29,10 +30,11 @@ pd = permutedims
 # constants
 const g = 9.8
 
-fmts = ["png", "eps"] # , "svg", "pdf"] # svg and pdf break
+fmts = ["png", "eps"] # , "svg", "pdf"] # svg and pdf are slow
 casedirs = ["AS12007200", "ASspinup20230617", "ASu4800-p4", "ASdry4800-7200", "ASu4800-8"]
 
-for casedir in casedirs
+Threads.@threads for casedir in casedirs
+   show("$(casedir)\n")
    #filenames = filter(f -> startswith(f,"cm1out") && endswith(f,".nc"), readdir(casedir))
 
    # load surface slice from 3D data
@@ -49,16 +51,17 @@ for casedir in casedirs
 
    clf()
    subplot(2,1,1)
-   pcolormesh((0:length(lon)).*0.5, (0:length(lat)).*0.5, pd(th), cmap=ColorMap("RdYlBu_r"))
+   pcolormesh((0:length(lon)).*0.5, (0:length(lat)).*0.5, pd(th), vmin=297, vmax=300.4, cmap=ColorMap("RdYlBu_r"))
    colorbar(label=L"\theta"*" (K)")
    gca().set_aspect("equal")
 
    subplot(2,1,2)
-   pcolormesh((0:length(lon)).*0.5, (0:length(lat)).*0.5, 1e3.*pd(qv), cmap=ColorMap("RdYlBu_r"))
+   pcolormesh((0:length(lon)).*0.5, (0:length(lat)).*0.5, 1e3.*pd(qv), vmin=15, vmax=20, cmap=ColorMap("RdYlBu_r"))
    colorbar(label=L"q_v"*" (g/kg)")
    gca().set_aspect("equal")
    tight_layout()
-
+   
+   show("q,th")
    [ savefig("$(casedir)/coldpools_d4.$(f)") for f in fmts ]
 
    clf()
@@ -73,5 +76,6 @@ for casedir in casedirs
    gca().set_aspect("equal")
    tight_layout()
    
+   show("; u,v\n")
    [savefig("$(casedir)/u10v10.$(f)") for f in fmts]
 end
